@@ -20,21 +20,42 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
   
   <style>
-    /* Page specific inline styles for layout */
-    .hero-section {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      
-    }
-    
-    .hero-img {
-      width: 100%; height: 100%; object-fit: cover;
-      
-    }
+   .hero-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-picture {
+  width: 100%;
+  height: auto;
+  display: block;
+
+}
+
+.hero-img {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .hero-section {
+    height: 100svh;
+    min-height: 650px;
+  }
+
+  .hero-img {
+    object-fit: cover;
+    object-position: center top;
+  }
+}
     .intro-brand {
       text-align: center;
       padding: var(--spacing-xl) var(--container-padding);
@@ -201,16 +222,19 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero-section">
-    <div class="hero-img-container" style="background-color: var(--pink-light);">
-      <img src="/images/hero.png" alt="Bakery Background" class="hero-img" style="object-position: top; ">
-    </div>
-    
-   
-    
-    
-  </section>
+  <picture class="hero-picture">
+    <!-- Mobile / Tablet -->
+    <source media="(max-width: 767px)" srcset="/images/hero-res.png">
+
+    <!-- Desktop -->
+    <img
+      src="/images/hero.png"
+      alt="Copy N’ Taste Bakery"
+      class="hero-img"
+    >
+  </picture>
+</section>
 
   <!-- Intro Brand Section -->
   <section class="intro-brand">
