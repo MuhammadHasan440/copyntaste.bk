@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy N' Taste | Premium Custom Baked Goods Brooklyn</title>
+  <meta name="description" content="Copy N' Taste: Custom baked goods, beautiful desserts, and unforgettable moments in Brooklyn, NY.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- External Libs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+  
+  <style>
+    /* Page specific inline styles for layout */
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      color: var(--chocolate);
+      position: relative;
+    }
+    .hero-img-container {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      background-color: var(--pink-soft);
+    }
+    .hero-img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.6; /* So text is readable */
+    }
+    .intro-brand {
+      text-align: center;
+      padding: var(--spacing-xl) var(--container-padding);
+      background-color: var(--cream);
+    }
+    .intro-brand-title {
+      font-size: clamp(3rem, 6vw, 6rem);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 2rem;
+      color: var(--berry);
+    }
+    .products-section {
+      padding: var(--spacing-xl) var(--container-padding);
+      background-color: var(--warm-white);
+    }
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 1024px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .shop-grid { grid-template-columns: 1fr; } }
+    
+    .product-card {
+      text-align: center;
+    }
+    .product-img-wrapper {
+      position: relative;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background-color: var(--cream);
+      aspect-ratio: 4/5;
+    }
+    .product-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .product-actions {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      opacity: 0; transform: translateY(10px);
+      transition: all var(--transition-fast);
+    }
+    .product-card:hover .product-actions {
+      opacity: 1; transform: translateY(0);
+    }
+    .btn-quick-add {
+      background: var(--warm-white);
+      color: var(--chocolate);
+      border: none;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: none;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all var(--transition-fast);
+    }
+    .btn-quick-add:hover {
+      background: var(--pink); color: var(--warm-white);
+    }
+    .product-rating {
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-rating span { color: var(--muted); }
+    .product-title a { font-family: var(--font-heading); font-size: 1.5rem; color: var(--chocolate); }
+    .product-price { margin-top: 0.5rem; font-family: var(--font-body); }
+
+    .about-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background-color: var(--pink-soft);
+    }
+    @media (max-width: 900px) { .about-section { grid-template-columns: 1fr; } }
+    .about-img-container { height: 100vh; overflow: hidden; position: relative; }
+    .about-img-container img { width: 100%; height: 100%; object-fit: cover; }
+    .about-content { padding: 4rem; }
+
+    .gallery-section { padding: var(--spacing-xl) 0; background: var(--cream); text-align: center;}
+    .masonry {
+      column-count: 3; column-gap: 1rem; padding: 2rem;
+    }
+    @media (max-width: 900px) { .masonry { column-count: 2; } }
+    @media (max-width: 600px) { .masonry { column-count: 1; } }
+    .masonry-item { break-inside: avoid; margin-bottom: 1rem; position: relative; border-radius: var(--border-radius-sm); overflow: hidden;}
+    .masonry-item img { width: 100%; display: block; }
+    .masonry-overlay {
+      position: absolute; top:0; left:0; width:100%; height:100%;
+      background: rgba(41,24,23,0.4);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity var(--transition-fast);
+      color: var(--warm-white); font-size: 2rem;
+    }
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loader">
+    <img src="images/logo.png" alt="Copy N' Taste" style="height: 80px; margin-bottom: 2rem;">
+    <div class="loader-percentage">0</div>
+    <div class="loader-text">Baking something good...</div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay"></div>
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items">
+      <!-- Injected via JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span class="cart-subtotal-amount">$0.00</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-magnetic"><span class="btn-inner">Checkout</span></a>
+      <button class="btn btn-secondary btn-continue">Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay">
+    <div class="mobile-nav-links">
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="menu.html" class="mobile-nav-link">Menu</a>
+      <a href="custom-orders.html" class="mobile-nav-link">Custom Orders</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-links desktop-only">
+      <a href="shop.html" class="nav-link">Shop</a>
+      <a href="menu.html" class="nav-link">Menu</a>
+      <a href="custom-orders.html" class="nav-link">Custom Orders</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="index.html" class="logo"><img src="images/logo.png" alt="Copy N' Taste" class="logo-img"></a>
+    <div class="nav-icons">
+      <a href="#" class="nav-link"><i class="fas fa-search"></i></a>
+      <a href="#" class="nav-link"><i class="far fa-user"></i></a>
+      <a href="#" class="nav-link cart-link">Cart <span class="cart-count">(0)</span></a>
+      <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-img-container" style="background-color: var(--pink-light);">
+      <img src="https://images.unsplash.com/photo-1557308536-ee471ef2c390?q=80&w=2000&auto=format&fit=crop" alt="Bakery Background" class="hero-img" style="opacity: 0.3; object-position: center; mix-blend-mode: multiply;">
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="float-element" data-speed="1.5" style="top: 20%; left: 10%; width: 150px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: rotate(-5deg);">
+      <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=400" style="width: 100%; display: block;">
+    </div>
+    <div class="float-element" data-speed="2.5" style="bottom: 15%; right: 15%; width: 200px; border-radius: 50%; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: rotate(10deg);">
+      <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?q=80&w=400" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    </div>
+    
+    <div class="hero-content container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="label animate-fade-up" style="margin-bottom: 1.5rem; color: var(--berry);">Brooklyn, New York</div>
+      <h1 class="hero-title" style="font-size: clamp(3.5rem, 8vw, 7.5rem); margin-bottom: 1.5rem; letter-spacing: -0.03em;">BAKED WITH LOVE.<br>MADE TO BE REMEMBERED.</h1>
+      <p class="hero-subtitle" style="margin: 0 auto 3rem; max-width: 45ch; font-size: 1.25rem;">Handcrafted artisan cakes and pastries. Baked fresh in Brooklyn, made specifically for your unforgettable moments.</p>
+      <div class="hero-cta" style="display: flex; gap: 1rem; justify-content: center;">
+        <a href="shop.html" class="btn btn-primary btn-magnetic"><span class="btn-inner">Explore Menu <i class="fas fa-arrow-right arrow-icon"></i></span></a>
+        <a href="custom-orders.html" class="btn btn-secondary btn-magnetic"><span class="btn-inner">Custom Orders</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Brand Section -->
+  <section class="intro-brand">
+    <div class="container">
+      <h2 class="intro-brand-title">NOT JUST DESSERT.<br>A LITTLE PIECE<br>OF HAPPINESS.</h2>
+      <p style="margin: 0 auto; max-width: 50ch;">Self-taught baking, high-quality ingredients, and a whole lot of love &mdash; made fresh in Brooklyn.</p>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="products-section">
+    <div class="container">
+      <div class="products-header">
+        <h2>THE CROWD FAVORITES</h2>
+        <a href="shop.html" class="animated-link" style="text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">View All</a>
+      </div>
+      <div class="shop-grid" id="featured-products">
+        <!-- Products injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- About Preview -->
+  <section class="about-section">
+    <div class="about-content">
+      <div class="label" style="margin-bottom: 2rem;">Meet The Baker</div>
+      <h2 style="font-size: 4rem; color: var(--berry);">Self-taught.<br>Passionate.<br>Always baking.</h2>
+      <p style="margin: 2rem 0;">Copy N' Taste was created from a love for beautiful desserts and unforgettable moments. Every batch is made from scratch with intention.</p>
+      <a href="about.html" class="btn btn-secondary btn-magnetic"><span class="btn-inner">Our Story</span></a>
+    </div>
+    <div class="about-img-container">
+      <img src="images/baker.jpg" alt="Meet the Baker">
+    </div>
+  </section>
+
+  <!-- Videos Section -->
+  <section class="video-section" style="padding: var(--spacing-xl) 0; background-color: var(--cream);">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 3rem; color: var(--chocolate);">A PEEK INSIDE THE KITCHEN</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <video autoplay loop muted playsinline style="width: 100%; border-radius: var(--border-radius-md); aspect-ratio: 9/16; object-fit: cover; box-shadow: 0 10px 30px rgba(41,24,23,0.05);">
+          <source src="videos/video1.mp4" type="video/mp4">
+        </video>
+        <video autoplay loop muted playsinline style="width: 100%; border-radius: var(--border-radius-md); aspect-ratio: 9/16; object-fit: cover; box-shadow: 0 10px 30px rgba(41,24,23,0.05);">
+          <source src="videos/video2.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram Gallery -->
+  <section class="gallery-section">
+    <div class="container">
+      <h2 style="margin-bottom: 4rem; color: var(--chocolate);">FROM OUR OVEN<br>TO YOUR FEED.</h2>
+      <div class="masonry">
+        <div class="masonry-item img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?q=80&w=800&auto=format&fit=crop" alt="Cake" class="img-zoom">
+          <div class="masonry-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="masonry-item img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1514517521153-1be72277b32f?q=80&w=800&auto=format&fit=crop" alt="Cookies" class="img-zoom">
+          <div class="masonry-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="masonry-item img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=800&auto=format&fit=crop" alt="Vintage cake" class="img-zoom">
+          <div class="masonry-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="masonry-item img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?q=80&w=800&auto=format&fit=crop" alt="Brownies" class="img-zoom">
+          <div class="masonry-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="masonry-item img-zoom-container">
+          <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?q=80&w=800&auto=format&fit=crop" alt="Cupcakes" class="img-zoom">
+          <div class="masonry-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+      </div>
+      <div style="margin-top: 3rem;">
+        <a href="https://instagram.com/copyntaste.bk" target="_blank" class="btn btn-secondary btn-magnetic"><span class="btn-inner">Follow @copyntaste.bk</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Copy N' Taste" style="height: 60px; margin-bottom: 1rem;">
+          <p>Custom baked goods<br>Brooklyn, NY</p>
+        </div>
+        <div class="footer-links">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">Cakes</a></li>
+            <li><a href="shop.html">Cookies</a></li>
+            <li><a href="shop.html">Cupcakes</a></li>
+            <li><a href="shop.html">Brownies</a></li>
+            <li><a href="shop.html">Dessert Boxes</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>About</h4>
+          <ul>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="custom-orders.html">Custom Orders</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Newsletter</h4>
+          <p style="font-size: 0.875rem; margin-bottom: 1rem;">Get sweet updates.</p>
+          <form class="footer-newsletter" onsubmit="event.preventDefault(); alert('You\'re on the list! ✨');">
+            <input type="email" placeholder="Email Address" required>
+            <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.75rem;">JOIN</button>
+          </form>
+          <h4 style="margin-top: 2rem;">Follow</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-big-text">BAKED WITH LOVE.</div>
+        <p style="font-size: 0.875rem;">&copy; 2026 Copy N' Taste. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    // Inject featured products
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('featured-products');
+      if (grid && window.products) {
+        const featured = window.products.filter(p => p.featured).slice(0, 4);
+        grid.innerHTML = featured.map(p => window.renderProductCard(p)).join('');
+      }
+    });
+  </script>
+</body>
+</html>
+

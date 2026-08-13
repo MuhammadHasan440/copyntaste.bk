@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop | Copy N' Taste</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .shop-header {
+      padding: calc(var(--spacing-xl) + 80px) 0 var(--spacing-lg);
+      background-color: var(--pink-soft);
+      text-align: center;
+    }
+    .shop-title {
+      font-size: clamp(3rem, 5vw, 5rem);
+      color: var(--berry);
+      margin-bottom: 1rem;
+    }
+    .shop-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .filter-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--muted);
+      border-radius: var(--border-radius-pill);
+      padding: 0.5rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      cursor: none;
+      transition: all var(--transition-fast);
+      color: var(--chocolate);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--chocolate);
+      color: var(--warm-white);
+      border-color: var(--chocolate);
+    }
+    .search-wrapper {
+      position: relative;
+    }
+    .shop-search-input {
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: var(--border-radius-pill);
+      border: 1px solid var(--muted);
+      background: transparent;
+      font-family: var(--font-body);
+      color: var(--chocolate);
+      outline: none;
+      width: 250px;
+    }
+    .search-wrapper i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 1024px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+    
+    .product-card {
+      text-align: center;
+    }
+    .product-img-wrapper {
+      position: relative;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background-color: var(--cream);
+      aspect-ratio: 4/5;
+    }
+    .product-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .product-actions {
+      position: absolute;
+      bottom: 1rem; right: 1rem;
+      opacity: 0; transform: translateY(10px);
+      transition: all var(--transition-fast);
+    }
+    .product-card:hover .product-actions {
+      opacity: 1; transform: translateY(0);
+    }
+    .btn-quick-add {
+      background: var(--warm-white);
+      color: var(--chocolate);
+      border: none;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: none;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all var(--transition-fast);
+    }
+    .btn-quick-add:hover {
+      background: var(--pink); color: var(--warm-white);
+    }
+    .product-rating {
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-title a { font-family: var(--font-heading); font-size: 1.5rem; color: var(--chocolate); }
+    @media (max-width: 600px) {
+      .product-title a { font-size: 1.125rem; }
+      .product-img-wrapper { margin-bottom: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <!-- Cart Overlay & Drawer -->
+  <div class="cart-overlay"></div>
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button class="close-cart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span class="cart-subtotal-amount">$0.00</span>
+      </div>
+      <a href="checkout.html" class="btn btn-primary btn-magnetic"><span class="btn-inner">Checkout</span></a>
+      <button class="btn btn-secondary btn-continue">Continue Shopping</button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-overlay">
+    <div class="mobile-nav-links">
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="menu.html" class="mobile-nav-link">Menu</a>
+      <a href="custom-orders.html" class="mobile-nav-link">Custom Orders</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-links desktop-only">
+      <a href="shop.html" class="nav-link">Shop</a>
+      <a href="menu.html" class="nav-link">Menu</a>
+      <a href="custom-orders.html" class="nav-link">Custom Orders</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="index.html" class="logo"><img src="images/logo.png" alt="Copy N' Taste" class="logo-img"></a>
+    <div class="nav-icons">
+      <a href="#" class="nav-link"><i class="fas fa-search"></i></a>
+      <a href="#" class="nav-link"><i class="far fa-user"></i></a>
+      <a href="#" class="nav-link cart-link">Cart <span class="cart-count">(0)</span></a>
+      <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <!-- Shop Header -->
+  <header class="shop-header">
+    <div class="container">
+      <h1 class="shop-title">SHOP THE BAKERY</h1>
+      <p style="margin: 0 auto;">Freshly baked favorites, made just for you.</p>
+    </div>
+  </header>
+
+  <!-- Shop Content -->
+  <main style="padding: var(--spacing-lg) 0;">
+    <div class="container">
+      <div class="shop-controls">
+        <div class="filter-group">
+          <button class="filter-btn active" data-category="all">ALL</button>
+          <button class="filter-btn" data-category="cakes">CAKES</button>
+          <button class="filter-btn" data-category="cupcakes">CUPCAKES</button>
+          <button class="filter-btn" data-category="cookies">COOKIES</button>
+          <button class="filter-btn" data-category="brownies">BROWNIES</button>
+          <button class="filter-btn" data-category="dessert-boxes">DESSERT BOXES</button>
+          <button class="filter-btn" data-category="seasonal">SEASONAL</button>
+        </div>
+        <div class="search-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" class="shop-search-input" placeholder="Search sweets...">
+        </div>
+      </div>
+      
+      <div class="shop-grid">
+        <!-- Injected via filters.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none;">
+        <div class="footer-big-text" style="font-size: clamp(2rem, 8vw, 8rem);">BAKED WITH LOVE.</div>
+        <p style="font-size: 0.875rem;">&copy; 2026 Copy N' Taste. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+

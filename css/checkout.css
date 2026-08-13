@@ -1,0 +1,134 @@
+/* Checkout and Cart Full Page Styles */
+
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 4rem;
+  padding: 4rem 0;
+}
+
+@media (max-width: 991px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.checkout-section {
+  margin-bottom: 3rem;
+}
+
+.checkout-section h3 {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(41, 24, 23, 0.1);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  flex: 1;
+  position: relative;
+}
+
+.form-control {
+  width: 100%;
+  padding: 1rem;
+  background-color: transparent;
+  border: 1px solid var(--muted);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--chocolate);
+  transition: border-color var(--transition-fast);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--chocolate);
+}
+
+.form-control::placeholder {
+  color: var(--muted);
+}
+
+.checkout-summary {
+  background-color: var(--pink-soft);
+  padding: 2rem;
+  border-radius: var(--border-radius-md);
+  position: sticky;
+  top: 100px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(41, 24, 23, 0.1);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.payment-method {
+  border: 1px solid var(--muted);
+  border-radius: var(--border-radius-sm);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  background-color: var(--warm-white);
+}
+
+.payment-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.stripe-element-container {
+  min-height: 200px;
+}
+
+/* Custom Order Form */
+.custom-order-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--cream);
+  padding: 3rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 40px rgba(41, 24, 23, 0.05);
+}
+
+.file-upload-wrapper {
+  border: 2px dashed var(--pink);
+  padding: 2rem;
+  text-align: center;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color var(--transition-fast);
+}
+
+.file-upload-wrapper:hover {
+  background-color: var(--pink-soft);
+}

@@ -1,0 +1,114 @@
+/* Copy N' Taste Keyframe Animations & Utility Classes */
+
+/* Keyframes */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px) rotate(-5deg); }
+  75% { transform: translateX(4px) rotate(5deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Animation Utility Classes */
+.animate-fade-up {
+  opacity: 0;
+  /* GSAP will animate this */
+}
+
+.cart-shake {
+  animation: shake 0.4s ease;
+}
+
+/* Image Hover Zoom */
+.img-zoom-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.img-zoom {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.img-zoom-container:hover .img-zoom {
+  transform: scale(1.08);
+}
+
+/* Decorative floating elements */
+.float-element {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Button Animations */
+.btn .arrow-icon {
+  margin-left: 0.5rem;
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .arrow-icon {
+  transform: translateX(4px) rotate(-45deg);
+}
+
+/* Link underline animation */
+.animated-link {
+  position: relative;
+  display: inline-block;
+}
+.animated-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.animated-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Reveal Text Classes (for GSAP split text equivalent if needed) */
+.reveal-text-wrapper {
+  overflow: hidden;
+  display: inline-block;
+}
+.reveal-text {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+/* Blur Reveal utility */
+.blur-reveal {
+  filter: blur(10px);
+  opacity: 0;
+}

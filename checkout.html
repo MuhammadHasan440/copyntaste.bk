@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Copy N' Taste</title>
+  <meta name="description" content="Secure checkout for Copy N' Taste custom baked goods.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body { background-color: var(--warm-white); }
+    
+    .checkout-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,248,239,0.95);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(41,24,23,0.06);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .checkout-page-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .checkout-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .checkout-breadcrumb span.active {
+      color: var(--chocolate);
+      font-weight: 500;
+    }
+
+    .secure-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--brown);
+      margin-bottom: 0.375rem;
+    }
+
+    .stripe-card-row {
+      background: var(--warm-white);
+      border: 1px solid rgba(41,24,23,0.15);
+      border-radius: var(--border-radius-sm);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .stripe-lock {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-brand-icons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .card-brand-icons img {
+      height: 24px;
+      opacity: 0.7;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1.25rem 2rem;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      border-radius: var(--border-radius-sm);
+      background: var(--chocolate);
+      color: var(--cream);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      min-height: 56px;
+    }
+
+    .submit-btn:hover { background: var(--berry); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .summary-divider {
+      border: none;
+      border-top: 1px solid rgba(41,24,23,0.08);
+      margin: 1.25rem 0;
+    }
+
+    .promo-row {
+      display: flex;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+
+    .promo-row input {
+      flex: 1;
+      font-size: 0.9375rem;
+    }
+
+    .promo-row button {
+      padding: 0 1.25rem;
+      background: transparent;
+      border: 1px solid rgba(41,24,23,0.2);
+      border-radius: var(--border-radius-sm);
+      font-size: 0.875rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .promo-row button:hover {
+      background: var(--chocolate);
+      color: var(--cream);
+      border-color: var(--chocolate);
+    }
+
+    @media (max-width: 767px) {
+      .checkout-page-wrap { padding: 1.5rem 1rem 4rem; }
+      .checkout-nav { padding: 0.75rem 1rem; }
+      .checkout-nav a:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="custom-cursor"></div>
+
+  <!-- Minimal Checkout Nav -->
+  <nav class="checkout-nav">
+    <a href="index.html">
+      <img src="images/logo.png" alt="Copy N' Taste" style="height: 44px; mix-blend-mode: multiply;">
+    </a>
+    <span class="secure-badge">
+      <i class="fas fa-lock" style="font-size: 0.75rem; color: var(--berry);"></i>
+      Secure Checkout
+    </span>
+    <a href="cart.html" style="font-size: 0.8125rem; color: var(--muted); text-decoration: underline;">
+      <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> Back to cart
+    </a>
+  </nav>
+
+  <div class="checkout-page-wrap">
+    
+    <!-- Breadcrumb -->
+    <div class="checkout-breadcrumb">
+      <a href="cart.html">Cart</a>
+      <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+      <span class="active">Information</span>
+      <i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i>
+      <span>Payment</span>
+    </div>
+
+    <div class="checkout-container">
+
+      <!-- LEFT: Form -->
+      <div class="checkout-form-col">
+        <form id="checkout-form" novalidate>
+
+          <!-- Contact -->
+          <div class="checkout-section">
+            <h3>Contact</h3>
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="you@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone</label>
+              <input type="tel" id="phone" class="form-control" placeholder="+1 (718) 000-0000" required>
+            </div>
+          </div>
+
+          <!-- Delivery Method -->
+          <div class="checkout-section">
+            <h3>Delivery Method</h3>
+            <div class="delivery-options">
+              <label class="delivery-option active" id="opt-pickup">
+                <input type="radio" name="delivery" value="pickup" checked>
+                <div>
+                  <div style="font-weight:500; font-size:0.9375rem;">Pickup</div>
+                  <div style="font-size:0.8125rem; color:var(--muted);">Brooklyn, NY &mdash; Free</div>
+                </div>
+              </label>
+              <label class="delivery-option" id="opt-delivery">
+                <input type="radio" name="delivery" value="delivery">
+                <div>
+                  <div style="font-weight:500; font-size:0.9375rem;">Delivery</div>
+                  <div style="font-size:0.8125rem; color:var(--muted);">NYC area &mdash; $10.00</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Shipping Address -->
+          <div class="checkout-section" id="address-section">
+            <h3>Shipping Address</h3>
+            <div class="form-row">
+              <div class="form-group" style="flex:1;">
+                <label class="form-label" for="first-name">First Name</label>
+                <input type="text" id="first-name" class="form-control" placeholder="Jane" required>
+              </div>
+              <div class="form-group" style="flex:1;">
+                <label class="form-label" for="last-name">Last Name</label>
+                <input type="text" id="last-name" class="form-control" placeholder="Doe" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="address">Address</label>
+              <input type="text" id="address" class="form-control" placeholder="123 Main Street" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="apt">Apt, suite, etc. (optional)</label>
+              <input type="text" id="apt" class="form-control" placeholder="Apt 4B">
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="flex:2;">
+                <label class="form-label" for="city">City</label>
+                <input type="text" id="city" class="form-control" placeholder="Brooklyn" required>
+              </div>
+              <div class="form-group" style="flex:1;">
+                <label class="form-label" for="state">State</label>
+                <input type="text" id="state" class="form-control" placeholder="NY" required>
+              </div>
+              <div class="form-group" style="flex:1;">
+                <label class="form-label" for="zip">ZIP</label>
+                <input type="text" id="zip" class="form-control" placeholder="11201" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="checkout-section" style="border-bottom:none;">
+            <h3>Payment</h3>
+            <div class="card-brand-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/80px-Mastercard-logo.svg.png" alt="Mastercard">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/80px-Visa_Inc._logo.svg.png" alt="Visa">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/80px-American_Express_logo_%282018%29.svg.png" alt="Amex">
+            </div>
+            <div class="stripe-lock">
+              <i class="fas fa-lock" style="color: var(--berry); font-size: 0.75rem;"></i>
+              All transactions are secure and encrypted via Stripe.
+            </div>
+            <div class="form-group">
+              <label class="form-label">Card Number</label>
+              <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="flex:1;">
+                <label class="form-label">Expiry Date</label>
+                <input type="text" class="form-control" placeholder="MM / YY" maxlength="7" required>
+              </div>
+              <div class="form-group" style="flex:1;">
+                <label class="form-label">CVC</label>
+                <input type="text" class="form-control" placeholder="&bull;&bull;&bull;" maxlength="4" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Name on Card</label>
+              <input type="text" class="form-control" placeholder="Jane Doe" required>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="place-order-btn">
+            <i class="fas fa-lock" style="font-size: 0.875rem;"></i>
+            <span id="btn-text">Place Order</span>
+          </button>
+
+          <p style="text-align:center; font-size:0.8125rem; color:var(--muted); margin-top:1rem;">
+            By placing your order, you agree to our 
+            <a href="#" style="text-decoration:underline;">Terms</a> &amp; 
+            <a href="#" style="text-decoration:underline;">Privacy Policy</a>.
+          </p>
+
+        </form>
+      </div>
+
+      <!-- RIGHT: Order Summary -->
+      <div class="checkout-summary-col">
+        <div class="checkout-summary">
+          <h3 style="font-family:var(--font-heading); font-size:1.5rem; margin-bottom:1.5rem; font-weight:400;">Order Summary</h3>
+          <div class="checkout-summary-items">
+            <!-- Injected by checkout.js -->
+          </div>
+          <hr class="summary-divider">
+          <div class="promo-row">
+            <input type="text" class="form-control" placeholder="Discount code" id="promo-input">
+            <button type="button" onclick="applyPromo()">Apply</button>
+          </div>
+          <hr class="summary-divider">
+          <div class="summary-item">
+            <span>Subtotal</span>
+            <span class="checkout-subtotal" style="font-weight:500;">$0.00</span>
+          </div>
+          <div class="summary-item" id="delivery-line" style="display:none;">
+            <span>Delivery</span>
+            <span>$10.00</span>
+          </div>
+          <div class="summary-item">
+            <span>Estimated Tax (8.875%)</span>
+            <span class="checkout-tax">$0.00</span>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span class="checkout-total" style="font-weight:700;">$0.00</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/checkout.js"></script>
+  <script>
+    // Delivery toggle
+    document.querySelectorAll('.delivery-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        document.querySelectorAll('.delivery-option').forEach(o => o.classList.remove('active'));
+        opt.classList.add('active');
+        document.getElementById('delivery-line').style.display =
+          opt.id === 'opt-delivery' ? 'flex' : 'none';
+      });
+    });
+
+    // Promo
+    function applyPromo() {
+      const val = document.getElementById('promo-input').value.trim();
+      if (val.toUpperCase() === 'SWEET10') {
+        alert('Promo applied! 10% off your order.');
+      } else if (val) {
+        alert('This promo code is not valid. Try SWEET10!');
+      }
+    }
+
+    // Card number auto-format
+    document.getElementById('card-number')?.addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+      let parts = [];
+      for (let i = 0; i < v.length; i += 4) parts.push(v.substring(i, i + 4));
+      e.target.value = parts.join(' ');
+    });
+  </script>
+</body>
+</html>

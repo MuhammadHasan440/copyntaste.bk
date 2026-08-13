@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed | Copy N' Taste</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .success-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--pink-soft);
+      text-align: center;
+      padding: var(--spacing-md);
+    }
+    .success-card {
+      background-color: var(--cream);
+      padding: 4rem 3rem;
+      border-radius: var(--border-radius-lg);
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(41,24,23,0.05);
+    }
+    .success-icon {
+      font-size: 4rem;
+      color: var(--berry);
+      margin-bottom: 2rem;
+    }
+    .order-number {
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--muted);
+      margin: 1.5rem 0 2.5rem;
+    }
+    .tracking-steps {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 3rem 0;
+    }
+    .tracking-steps::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--pink);
+      z-index: 1;
+    }
+    .step {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 33.33%;
+    }
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      background: var(--cream);
+      border: 2px solid var(--muted);
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      transition: all var(--transition-fast);
+    }
+    .step.active .step-dot {
+      border-color: var(--berry);
+      background: var(--berry);
+      color: var(--warm-white);
+    }
+    .step-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .step.active .step-label {
+      color: var(--chocolate);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <div class="success-container">
+    <div class="success-card">
+      <div class="success-icon animate-fade-up">
+        <i class="fas fa-certificate"></i>
+      </div>
+      <h1 style="font-size: 3rem;">ORDER CONFIRMED ✨</h1>
+      <p style="margin-top: 1rem;">Thank you for supporting Copy N' Taste. Your sweet treats are getting ready!</p>
+      <div class="order-number">Order #CNT-1024</div>
+      
+      <div class="tracking-steps">
+        <div class="step active">
+          <div class="step-dot"><i class="fas fa-check"></i></div>
+          <div class="step-label">Received</div>
+        </div>
+        <div class="step">
+          <div class="step-dot"><i class="fas fa-check"></i></div>
+          <div class="step-label">Baking</div>
+        </div>
+        <div class="step">
+          <div class="step-dot"><i class="fas fa-check"></i></div>
+          <div class="step-label">Ready</div>
+        </div>
+      </div>
+      
+      <p style="font-size: 0.875rem; color: var(--muted); margin-bottom: 2rem;">A confirmation email has been sent to you.</p>
+      
+      <a href="index.html" class="btn btn-primary btn-magnetic"><span class="btn-inner">Back to Home</span></a>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if(window.gsap) {
+        gsap.fromTo('.success-card', 
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+        );
+      }
+    });
+  </script>
+</body>
+</html>
+

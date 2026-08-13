@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Copy N' Taste</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .faq-section { max-width: 800px; margin: 0 auto; padding: calc(var(--spacing-xl) + 80px) var(--container-padding) var(--spacing-xl); }
+    .accordion-item { border-bottom: 1px solid rgba(41,24,23,0.1); }
+    .accordion-header {
+      width: 100%; padding: 1.5rem 0;
+      background: transparent; border: none;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-body); font-size: 1.125rem; font-weight: 500;
+      cursor: pointer; color: var(--chocolate); text-align: left;
+    }
+    .accordion-content {
+      padding-bottom: 1.5rem;
+      display: none;
+      color: var(--brown);
+    }
+    .accordion-item.active .accordion-content { display: block; }
+    .accordion-item.active .accordion-header i { transform: rotate(180deg); color: var(--pink); }
+  </style>
+</head>
+<body>
+
+  <div class="custom-cursor"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled">
+    <div class="nav-links desktop-only">
+      <a href="shop.html" class="nav-link">Shop</a>
+      <a href="custom-orders.html" class="nav-link">Custom Orders</a>
+      <a href="about.html" class="nav-link">About</a>
+    </div>
+    <a href="index.html" class="logo"><img src="images/logo.png" alt="Copy N' Taste" class="logo-img"></a>
+    <div class="nav-icons">
+      <a href="cart.html" class="nav-link cart-link">Cart <span class="cart-count">(0)</span></a>
+    </div>
+  </nav>
+
+  <section class="faq-section">
+    <h1 style="text-align: center; margin-bottom: 3rem; color: var(--berry);">FREQUENTLY ASKED QUESTIONS</h1>
+    
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
+          What areas do you deliver to? <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="accordion-content">
+          <p>We deliver throughout Brooklyn and most of Manhattan. Delivery fees vary based on distance.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
+          How far in advance should I order? <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="accordion-content">
+          <p>For custom cakes, we recommend at least 2 weeks notice. For standard shop items, 48 hours is required.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
+          Do you accommodate allergies? <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="accordion-content">
+          <p>While we can omit certain ingredients upon request, our kitchen processes nuts, dairy, wheat, and soy. We cannot guarantee a 100% allergen-free environment.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="this.parentElement.classList.toggle('active')">
+          How do custom orders work? <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="accordion-content">
+          <p>Simply fill out our <a href="custom-orders.html" style="text-decoration: underline;">Custom Order form</a> with your details. We'll reply within 24-48 hours with a quote and consultation link!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top: none;">
+        <div class="footer-big-text" style="font-size: clamp(2rem, 8vw, 8rem);">BAKED WITH LOVE.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+
