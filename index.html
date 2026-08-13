@@ -28,23 +28,12 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      padding-top: 80px;
+      
     }
-    .hero-content {
-      text-align: center;
-      z-index: 2;
-      color: var(--chocolate);
-      position: relative;
-    }
-    .hero-img-container {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      background-color: var(--pink-soft);
-    }
+    
     .hero-img {
       width: 100%; height: 100%; object-fit: cover;
-      opacity: 0.6; /* So text is readable */
+      
     }
     .intro-brand {
       text-align: center;
@@ -131,7 +120,7 @@
     }
     @media (max-width: 900px) { .about-section { grid-template-columns: 1fr; } }
     .about-img-container { height: 100vh; overflow: hidden; position: relative; }
-    .about-img-container img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img-container img { width: 100%; height: 100%; object-fit: contain; }
     .about-content { padding: 4rem; }
 
     .gallery-section { padding: var(--spacing-xl) 0; background: var(--cream); text-align: center;}
@@ -215,26 +204,12 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-img-container" style="background-color: var(--pink-light);">
-      <img src="https://images.unsplash.com/photo-1557308536-ee471ef2c390?q=80&w=2000&auto=format&fit=crop" alt="Bakery Background" class="hero-img" style="opacity: 0.3; object-position: center; mix-blend-mode: multiply;">
+      <img src="/images/hero.png" alt="Bakery Background" class="hero-img" style="object-position: top; ">
     </div>
     
-    <!-- Floating Elements -->
-    <div class="float-element" data-speed="1.5" style="top: 20%; left: 10%; width: 150px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: rotate(-5deg);">
-      <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=400" style="width: 100%; display: block;">
-    </div>
-    <div class="float-element" data-speed="2.5" style="bottom: 15%; right: 15%; width: 200px; border-radius: 50%; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transform: rotate(10deg);">
-      <img src="https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?q=80&w=400" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-    </div>
+   
     
-    <div class="hero-content container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-      <div class="label animate-fade-up" style="margin-bottom: 1.5rem; color: var(--berry);">Brooklyn, New York</div>
-      <h1 class="hero-title" style="font-size: clamp(3.5rem, 8vw, 7.5rem); margin-bottom: 1.5rem; letter-spacing: -0.03em;">BAKED WITH LOVE.<br>MADE TO BE REMEMBERED.</h1>
-      <p class="hero-subtitle" style="margin: 0 auto 3rem; max-width: 45ch; font-size: 1.25rem;">Handcrafted artisan cakes and pastries. Baked fresh in Brooklyn, made specifically for your unforgettable moments.</p>
-      <div class="hero-cta" style="display: flex; gap: 1rem; justify-content: center;">
-        <a href="shop.html" class="btn btn-primary btn-magnetic"><span class="btn-inner">Explore Menu <i class="fas fa-arrow-right arrow-icon"></i></span></a>
-        <a href="custom-orders.html" class="btn btn-secondary btn-magnetic"><span class="btn-inner">Custom Orders</span></a>
-      </div>
-    </div>
+    
   </section>
 
   <!-- Intro Brand Section -->
